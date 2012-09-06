@@ -1,0 +1,7 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_1='/Users/littleq/github/dbclient/dropbox'
+let g:netrw_dirhist_2='/Users/littleq/bin'
+let g:netrw_dirhist_3='/Users/littleq/temp/go/appengine/myapp'
+let g:netrw_dirhist_4='/Users/littleq/heroku/nccustudynet/studynet/studynet'
+let g:netrw_dirhist_5='/Users/littleq/heroku/nccustudynet/studynet/configs/common'

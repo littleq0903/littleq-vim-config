@@ -1,0 +1,2 @@
+markdown-1.2.2.vba: call delete('/Users/littleq/.vim/ftdetect/markdown.vim')|call delete('/Users/littleq/.vim/snippets/markdown.snippets')|call delete('/Users/littleq/.vim/syntax/markdown.vim')
+tagbar.vmb: call delete('/Users/littleq/.vim/autoload/tagbar.vim')|call delete('/Users/littleq/.vim/doc/tagbar.txt')|call delete('/Users/littleq/.vim/plugin/tagbar.vim')|call delete('/Users/littleq/.vim/syntax/tagbar.vim')
