@@ -5,6 +5,7 @@ autocmd BufRead,BufNewFile *.py map <F7> :% w !pyflakes<CR>
 autocmd BufRead,BufNewFile *.php map <F5> :% w !php<CR>
 autocmd BufRead,BufNewFile *.php map <F6> :% w !php -l<CR>
 
+
 " 遇到 Makefile 就 set noexpandtab
 autocmd BufRead,BufNewFile ?akefile* set noexpandtab
 
@@ -17,7 +18,6 @@ set guifont=Droid\ Sans\ Mono\ 12
 let g:use_zen_complete_tag = 1
 let g:user_zen_expandabbr_key = '<c-e>'
 let python_highlight_all = 1
-let g:pydiction_location = '~/.vim/bundle/pydiction/complete-dict'
 let g:easytags_cmd = '/usr/local/bin/ctags'
 let g:Tlist_Ctags_Cmd = '/opt/local/bin/ctags'
 let g:EasyMotion_leader_key = '<Leader>m'
@@ -27,7 +27,7 @@ call pathogen#infect()
 call pathogen#runtime_append_all_bundles()
 
 let g:user_zen_settings = {
-\  'lang' : 'ja',
+\  'lang' : 'en',
 \  'html' : {
 \    'filters' : 'html',
 \    'indentation' : '    '
@@ -94,6 +94,12 @@ let g:neocomplcache_enable_underbar_completion = 1
 let g:neocomplcache_min_syntax_length = 3
 let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 
+" Gist
+let g:gist_clip_command = 'pbcopy'
+let g:gist_detect_filetype = 1
+let g:gist_open_browser_after_post = 1
+"let g:gist_browser_command = ''
+
 " Define dictionary.
 let g:neocomplcache_dictionary_filetype_lists = {
     \ 'default' : '',
@@ -158,7 +164,7 @@ let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
 
 "let g:acp_behaviorSnipmateLength=1
 
-colorscheme yzlin256 
+colorscheme elflord 
 set t_Co=256
 set ffs=unix,dos ff=unix
 
@@ -173,11 +179,12 @@ autocmd FileType php set complete+=k
 autocmd FileType javascript set dictionary+=~/.vim/dict/jquery.list
 autocmd FileType javascript set complete+=k
 
-autocmd FileType python set dictionary+=~/.vim/bundle/pydiction/complete-dict
+autocmd FileType python set dictionary+=~/.vim/dict/python.list
 autocmd FileType python set complete+=k
 
+
 "設定背景顏色為黑色
-"set background=dark
+set background=dark
 "colors darkblue
 
 " 關閉 vi 兼容模式
@@ -225,7 +232,7 @@ set hlsearch
 " 加強式尋找功能，在鍵入 patern 時會立即反應移動至目前鍵入之 patern 上
 set incsearch
 " 底下的command status line為兩行
-set cmdheight=2
+set cmdheight=1
 " 總是顯示資訊
 set laststatus=2
 " Line highlight 設此是游標整行會標註顏色
@@ -234,21 +241,23 @@ set cursorline
 "set cursorcolumn
 
 " 設定狀態列訊息
-highlight User1 ctermfg=red ctermbg=NONE
-highlight User2 term=underline cterm=underline ctermfg=green
-highlight User3 term=underline cterm=underline ctermfg=yellow
+"highlight User1 ctermfg=red ctermbg=NONE
+"highlight User2 term=underline cterm=underline ctermfg=green
+"highlight User3 term=underline cterm=underline ctermfg=yellow
 "highlight User4 term=underline cterm=underline ctermfg=white
-highlight User5 ctermfg=cyan
-highlight User6 ctermfg=white
+"highlight User5 ctermfg=cyan
+"highlight User6 ctermfg=white
 
 
 " %1* -> User1's highlight, %2*->User2's highlight
 " =   -> Separation point between left and right aligned items.
 " <   -> Where to truncate line if too long.  Default is at the start.
-set statusline=%4*%<\ %1*[%F]
-set statusline+=%4*\ %5*[%{&encoding}, " encoding
-set statusline+=%{&fileformat}]%m " file format
-set statusline+=%4*%=\ %6*%y%4*\ %3*%l%4*,\ %3*%c%4*\ \<\ %2*%P%4*\ \>
+
+"set statusline=%4*%<\ %1*[%F]
+"set statusline+=%4*\ %5*[%{&encoding}, " encoding
+"set statusline+=%{&fileformat}]%m " file format
+"set statusline+=%4*%=\ %6*%y%4*\ %3*%l%4*,\ %3*%c%4*\ \<\ %2*%P%4*\ \>
+let g:Powerline_symbols = 'fancy'
 
 " 設定檔案編碼清單
 "set fencs=utf-8,big5,bgk,euc-jp,utf-16le
@@ -268,15 +277,13 @@ nmap <F1> :wall<CR>
 map <F2> :NERDTreeToggle<CR>
 " Most Recently Used (MRU) files
 map <s-F2> :MRU<CR>
-" Tag list
-map <F3> :TlistToggle<CR>
 " Update file
-map <F4> :TagbarToggle<CR>
+map <F3> :TagbarToggle<CR>
+" AutoComple Open or close
+imap <F4> <ESC>:AutoComplPopDisable<CR>
+imap <s-F4> <ESC>:AutoComplPopEnable<CR>
 " Clear last used search pattern
 nmap <F5> :let @/=""<CR>
-" AutoComple Open or close
-imap <F5> <ESC>:AutoComplPopDisable<CR>
-imap <s-F5> <ESC>:AutoComplPopEnable<CR>
 " vim menu
 source $VIMRUNTIME/menu.vim
 set wildmenu
@@ -294,16 +301,16 @@ map <F6> :emenu <C-Z>
 "map <C-y> :! do-you-commit
  
 " Comment Mode 也可用bash的key binding
- cmap   <c-a>   <home>
- cmap   <c-e>   <end>
- cnoremap   <c-b>   <left>
- cnoremap   <c-d>   <del>
- cnoremap   <c-f>   <right>
- cnoremap   <c-n>   <down>
- cnoremap   <c-p>   <up>
+cmap   <c-a>   <home>
+cmap   <c-e>   <end>
+cnoremap   <c-b>   <left>
+cnoremap   <c-d>   <del>
+cnoremap   <c-f>   <right>
+cnoremap   <c-n>   <down>
+cnoremap   <c-p>   <up>
 
- cnoremap   <esc><c-b>  <s-left>
- cnoremap   <esc><c-f>  <s-right>
+cnoremap   <esc><c-b>  <s-left>
+cnoremap   <esc><c-f>  <s-right>
  
 " tab config
 map tn :tabnext<CR>
@@ -311,6 +318,11 @@ map tp :tabprev<CR>
 map te :tabnew 
 map tc :tabclose<CR>
 
+
+map ll 3<c-w>> 
+map hh 3<c-w><
+map kk 3<c-w>+
+map jj 3<c-w>-
  
 " Normal Mode時,可用tab及shift-Tab做縮排
 nmap <tab> v>
@@ -419,4 +431,4 @@ endif " has("autocmd")
 
 " set the background to transparent
 " must be under the colorscheme
-highlight Normal ctermbg=NONE
+" highlight Normal ctermbg=NONE
