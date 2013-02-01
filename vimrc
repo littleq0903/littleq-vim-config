@@ -21,6 +21,7 @@ let g:pydiction_location = '~/.vim/bundle/pydiction/complete-dict'
 let g:easytags_cmd = '/usr/local/bin/ctags'
 let g:Tlist_Ctags_Cmd = '/opt/local/bin/ctags'
 let g:EasyMotion_leader_key = '<Leader>m'
+let g:Powerline_symbols = 'fancy'
 
 
 call pathogen#infect()
